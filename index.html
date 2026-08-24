@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e19" />
+    <title>Dhan Terminal — Options Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">d</span><span>dhan</span><small>TERMINAL</small></div>
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav-item active"><span>⌘</span> Dashboard</button>
+          <button class="nav-item"><span>◫</span> Watchlists</button>
+          <button class="nav-item"><span>◈</span> Positions</button>
+          <button class="nav-item"><span>▤</span> Orders</button>
+          <button class="nav-item"><span>◌</span> Strategy Lab</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="server-status"><i></i><span>DhanHQ connected</span></div>
+          <button class="profile"><span class="avatar">AK</span><span>Arjun Khanna<small>CLIENT • 1204581</small></span><b>⌄</b></button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="market-pill"><i></i><span>Markets open</span><b>Closes in 02:18:44</b></div>
+          <div class="top-actions"><button class="icon-button" aria-label="Notifications">♧</button><button class="help-button">?</button><button class="funds-button">Add funds</button></div>
+        </header>
+
+        <section class="content">
+          <div class="page-title"><div><p class="eyebrow">OPTIONS INTELLIGENCE</p><h1>Market <span>Dashboard</span></h1></div><div class="expiry"><label>Analysis interval</label><div class="timeframes" aria-label="Signal timeframe"><button class="active" data-frame="3">3 min</button><button data-frame="5">5 min</button></div></div></div>
+
+          <section class="market-dashboard" aria-label="Index option dashboard">
+            <div class="dashboard-heading"><div><h2>Index signals</h2><p>Options data is used to generate an indication, not a trading recommendation.</p></div><button id="explainSignals" class="outline-button">ⓘ How signals work</button></div>
+            <div id="marketCards" class="market-cards"></div>
+          </section>
+
+          <section class="scanner-grid" aria-label="F&O and sector scanners">
+            <article class="scanner-panel"><div class="scanner-heading"><div><p class="eyebrow">F&O STOCK SCANNER</p><h2>Highest-conviction setups</h2></div><span class="live-label">● LIVE RANKING</span></div><div class="scanner-tabs"><button class="active" data-scanner="bullish">🟢 Bullish</button><button data-scanner="bearish">🔴 Bearish</button></div><div class="scanner-table"><div class="scanner-row scanner-label"><span>RANK / STOCK</span><span>OI STRUCTURE</span><span>3M / 5M</span><span>SCORE</span><span>SIGNAL</span></div><div id="stockScanner"></div></div><p class="scanner-note">Ranks use price/VWAP, futures OI, option OI, PCR, volume and 3M/5M confirmation.</p></article>
+            <article class="scanner-panel"><div class="scanner-heading"><div><p class="eyebrow">SECTOR ANALYSIS</p><h2>Sector leaderboard</h2></div><button id="sectorInfo" class="info-button">ⓘ</button></div><div id="sectorScanner" class="sector-list"></div><p class="scanner-note">Follow strong sectors first, then review the highest-ranked F&O stocks.</p></article>
+          </section>
+
+          <section class="instrument-card">
+            <div class="instrument-main"><div class="nifty-icon" id="indexBadge">N</div><div><h2 id="indexName">NIFTY 50 <span class="exchange">NSE</span></h2><p id="indexDescription">India's benchmark index</p></div></div>
+            <div class="quote"><span class="price" id="indexPrice">24,876.35</span><span class="move positive" id="indexMove">+112.60 &nbsp; +0.45%</span></div>
+            <div class="quote-stat"><label>DAY HIGH</label><b>24,912.80</b></div><div class="quote-stat"><label>DAY LOW</label><b>24,744.10</b></div>
+            <button class="chart-button">↗ &nbsp; Full chart</button>
+          </section>
+
+          <section class="trading-grid">
+            <div class="chain-panel">
+              <div class="chain-toolbar"><div class="tabs"><button class="selected">Raw option chain</button><button>OI analytics</button></div><div class="chain-controls"><button class="filter">⌘ Filters <b>2</b></button><button>⚙</button></div></div>
+              <div class="chain-meta"><span>CALLS</span><span class="strike-title">STRIKE</span><span>PUTS</span></div>
+              <div class="chain-head"><span>OI <i>ⓘ</i></span><span>LTP</span><span>CHG</span><span>IV</span><span>OI <i>ⓘ</i></span><span>LTP</span><span>CHG</span><span>IV</span></div>
+              <div id="optionRows" class="option-rows"></div>
+              <div class="chain-footer"><span><i class="call-dot"></i> Call</span><span><i class="put-dot"></i> Put</span><span>Prices delayed by 1 sec</span></div>
+            </div>
+
+            <aside class="trade-panel">
+              <div class="trade-heading"><div><p class="eyebrow">QUICK ORDER</p><h2>Build trade</h2></div><button class="settings">⚙</button></div>
+              <div class="segment-switch"><button class="active">Options</button><button>Futures</button></div>
+              <div class="selected-contract"><span class="contract-tag">CE</span><div><b id="contractName">NIFTY 24900 CE</b><small>28 AUG 2025 · NSE</small></div><button id="clearContract" aria-label="Clear selected contract">×</button></div>
+              <div class="buy-sell"><button class="buy active">BUY</button><button class="sell">SELL</button></div>
+              <div class="form-row"><label>Quantity <div class="stepper"><button id="qtyDown">−</button><output id="quantity">50</output><button id="qtyUp">+</button></div><small>1 lot = 50 qty</small></label><label>Order type <button class="select-field">MARKET <span>⌄</span></button></label></div>
+              <div class="price-input"><label>Limit price <span>optional</span></label><div>₹ <output id="orderPrice">123.45</output></div></div>
+              <div class="cost-summary"><span>Required margin</span><b>₹6,172.50</b><span>Available balance</span><b class="balance">₹1,24,390.00</b></div>
+              <button class="place-order" id="placeOrder">Buy NIFTY 24900 CE <span>→</span></button>
+              <p class="risk-note">ⓘ Options trading carries substantial risk. <a href="#">Know more</a></p>
+            </aside>
+          </section>
+        </section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <dialog id="signalDialog" class="signal-dialog"><div><button id="closeDialog" class="dialog-close">×</button><p class="eyebrow">SIGNAL METHODOLOGY</p><h2>Reading the dashboard</h2><p><b>PCR</b> is total put OI divided by total call OI. <b>Change-OI PCR</b> uses put change in OI divided by call change in OI, which surfaces fresh positioning.</p><p>The engine scores PCR, call/put OI addition or unwinding, change in OI, price versus VWAP, volume, 3-minute momentum, 5-minute trend, and sector sentiment. No individual factor can create a trade signal.</p><div class="score-scale"><span>+10 to +15<br><b>STRONG BUY</b></span><span>+5 to +9<br><b>BUY</b></span><span>−4 to +4<br><b>WAIT</b></span><span>−5 to −9<br><b>SELL</b></span><span>−10 to −15<br><b>STRONG SELL</b></span></div><p class="dialog-note">Signals are decision support only and can change quickly. Confirm price action, liquidity, risk limits, and your own strategy before placing any order.</p></div></dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
