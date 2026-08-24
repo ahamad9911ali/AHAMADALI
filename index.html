@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e19" />
+    <title>Dhan Terminal — Options Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">d</span><span>dhan</span><small>TERMINAL</small></div>
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav-item active"><span>⌘</span> Trade</button>
+          <button class="nav-item"><span>◫</span> Watchlists</button>
+          <button class="nav-item"><span>◈</span> Positions</button>
+          <button class="nav-item"><span>▤</span> Orders</button>
+          <button class="nav-item"><span>◌</span> Strategy Lab</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="server-status"><i></i><span>DhanHQ connected</span></div>
+          <button class="profile"><span class="avatar">AK</span><span>Arjun Khanna<small>CLIENT • 1204581</small></span><b>⌄</b></button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="market-pill"><i></i><span>Markets open</span><b>Closes in 02:18:44</b></div>
+          <div class="top-actions"><button class="icon-button" aria-label="Notifications">♧</button><button class="help-button">?</button><button class="funds-button">Add funds</button></div>
+        </header>
+
+        <section class="content">
+          <div class="page-title"><div><p class="eyebrow">OPTIONS DESK</p><h1>NIFTY <span>Option Chain</span></h1></div><div class="expiry"><label>Expiry</label><button>28 AUG 2025 <span>⌄</span></button></div></div>
+
+          <section class="instrument-card">
+            <div class="instrument-main"><div class="nifty-icon">N</div><div><h2>NIFTY 50 <span class="exchange">NSE</span></h2><p>India's benchmark index</p></div></div>
+            <div class="quote"><span class="price">24,876.35</span><span class="move positive">+112.60 &nbsp; +0.45%</span></div>
+            <div class="quote-stat"><label>DAY HIGH</label><b>24,912.80</b></div><div class="quote-stat"><label>DAY LOW</label><b>24,744.10</b></div>
+            <button class="chart-button">↗ &nbsp; Full chart</button>
+          </section>
+
+          <section class="trading-grid">
+            <div class="chain-panel">
+              <div class="chain-toolbar"><div class="tabs"><button class="selected">Option chain</button><button>OI analytics</button></div><div class="chain-controls"><button class="filter">⌘ Filters <b>2</b></button><button>⚙</button></div></div>
+              <div class="chain-meta"><span>CALLS</span><span class="strike-title">STRIKE</span><span>PUTS</span></div>
+              <div class="chain-head"><span>OI <i>ⓘ</i></span><span>LTP</span><span>CHG</span><span>IV</span><span>OI <i>ⓘ</i></span><span>LTP</span><span>CHG</span><span>IV</span></div>
+              <div id="optionRows" class="option-rows"></div>
+              <div class="chain-footer"><span><i class="call-dot"></i> Call</span><span><i class="put-dot"></i> Put</span><span>Prices delayed by 1 sec</span></div>
+            </div>
+
+            <aside class="trade-panel">
+              <div class="trade-heading"><div><p class="eyebrow">QUICK ORDER</p><h2>Build trade</h2></div><button class="settings">⚙</button></div>
+              <div class="segment-switch"><button class="active">Options</button><button>Futures</button></div>
+              <div class="selected-contract"><span class="contract-tag">CE</span><div><b id="contractName">NIFTY 24900 CE</b><small>28 AUG 2025 · NSE</small></div><button id="clearContract" aria-label="Clear selected contract">×</button></div>
+              <div class="buy-sell"><button class="buy active">BUY</button><button class="sell">SELL</button></div>
+              <div class="form-row"><label>Quantity <div class="stepper"><button id="qtyDown">−</button><output id="quantity">50</output><button id="qtyUp">+</button></div><small>1 lot = 50 qty</small></label><label>Order type <button class="select-field">MARKET <span>⌄</span></button></label></div>
+              <div class="price-input"><label>Limit price <span>optional</span></label><div>₹ <output id="orderPrice">123.45</output></div></div>
+              <div class="cost-summary"><span>Required margin</span><b>₹6,172.50</b><span>Available balance</span><b class="balance">₹1,24,390.00</b></div>
+              <button class="place-order" id="placeOrder">Buy NIFTY 24900 CE <span>→</span></button>
+              <p class="risk-note">ⓘ Options trading carries substantial risk. <a href="#">Know more</a></p>
+            </aside>
+          </section>
+        </section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
