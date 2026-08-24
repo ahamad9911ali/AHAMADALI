@@ -14,7 +14,7 @@
       <aside class="sidebar">
         <div class="brand"><span class="brand-mark">d</span><span>dhan</span><small>TERMINAL</small></div>
         <nav class="nav" aria-label="Main navigation">
-          <button class="nav-item active"><span>⌘</span> Trade</button>
+          <button class="nav-item active"><span>⌘</span> Dashboard</button>
           <button class="nav-item"><span>◫</span> Watchlists</button>
           <button class="nav-item"><span>◈</span> Positions</button>
           <button class="nav-item"><span>▤</span> Orders</button>
@@ -33,11 +33,16 @@
         </header>
 
         <section class="content">
-          <div class="page-title"><div><p class="eyebrow">OPTIONS DESK</p><h1>NIFTY <span>Option Chain</span></h1></div><div class="expiry"><label>Expiry</label><button>28 AUG 2025 <span>⌄</span></button></div></div>
+          <div class="page-title"><div><p class="eyebrow">OPTIONS INTELLIGENCE</p><h1>Market <span>Dashboard</span></h1></div><div class="expiry"><label>Analysis interval</label><div class="timeframes" aria-label="Signal timeframe"><button class="active" data-frame="3">3 min</button><button data-frame="5">5 min</button></div></div></div>
+
+          <section class="market-dashboard" aria-label="Index option dashboard">
+            <div class="dashboard-heading"><div><h2>Index signals</h2><p>Options data is used to generate an indication, not a trading recommendation.</p></div><button id="explainSignals" class="outline-button">ⓘ How signals work</button></div>
+            <div id="marketCards" class="market-cards"></div>
+          </section>
 
           <section class="instrument-card">
-            <div class="instrument-main"><div class="nifty-icon">N</div><div><h2>NIFTY 50 <span class="exchange">NSE</span></h2><p>India's benchmark index</p></div></div>
-            <div class="quote"><span class="price">24,876.35</span><span class="move positive">+112.60 &nbsp; +0.45%</span></div>
+            <div class="instrument-main"><div class="nifty-icon" id="indexBadge">N</div><div><h2 id="indexName">NIFTY 50 <span class="exchange">NSE</span></h2><p id="indexDescription">India's benchmark index</p></div></div>
+            <div class="quote"><span class="price" id="indexPrice">24,876.35</span><span class="move positive" id="indexMove">+112.60 &nbsp; +0.45%</span></div>
             <div class="quote-stat"><label>DAY HIGH</label><b>24,912.80</b></div><div class="quote-stat"><label>DAY LOW</label><b>24,744.10</b></div>
             <button class="chart-button">↗ &nbsp; Full chart</button>
           </section>
@@ -67,6 +72,7 @@
       </main>
     </div>
     <div id="toast" class="toast" role="status"></div>
+    <dialog id="signalDialog" class="signal-dialog"><div><button id="closeDialog" class="dialog-close">×</button><p class="eyebrow">SIGNAL METHODOLOGY</p><h2>Reading the dashboard</h2><p><b>PCR</b> is put open interest divided by call open interest. A rising PCR can show stronger put-side participation; a falling PCR can show stronger call-side participation.</p><p><b>OI build-up</b> compares open-interest changes on calls and puts. The dashboard combines PCR direction, net OI build-up, and the selected 3 or 5 minute price trend to label the current bias.</p><p class="dialog-note">Signals are informational and can change quickly. Confirm with price action, risk limits, and your own strategy before placing any order.</p></div></dialog>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
