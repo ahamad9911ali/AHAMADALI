@@ -40,6 +40,11 @@
             <div id="marketCards" class="market-cards"></div>
           </section>
 
+          <section class="scanner-grid" aria-label="F&O and sector scanners">
+            <article class="scanner-panel"><div class="scanner-heading"><div><p class="eyebrow">F&O STOCK SCANNER</p><h2>Highest-conviction setups</h2></div><span class="live-label">● LIVE RANKING</span></div><div class="scanner-tabs"><button class="active" data-scanner="bullish">🟢 Bullish</button><button data-scanner="bearish">🔴 Bearish</button></div><div class="scanner-table"><div class="scanner-row scanner-label"><span>RANK / STOCK</span><span>OI STRUCTURE</span><span>3M / 5M</span><span>SCORE</span><span>SIGNAL</span></div><div id="stockScanner"></div></div><p class="scanner-note">Ranks use price/VWAP, futures OI, option OI, PCR, volume and 3M/5M confirmation.</p></article>
+            <article class="scanner-panel"><div class="scanner-heading"><div><p class="eyebrow">SECTOR ANALYSIS</p><h2>Sector leaderboard</h2></div><button id="sectorInfo" class="info-button">ⓘ</button></div><div id="sectorScanner" class="sector-list"></div><p class="scanner-note">Follow strong sectors first, then review the highest-ranked F&O stocks.</p></article>
+          </section>
+
           <section class="instrument-card">
             <div class="instrument-main"><div class="nifty-icon" id="indexBadge">N</div><div><h2 id="indexName">NIFTY 50 <span class="exchange">NSE</span></h2><p id="indexDescription">India's benchmark index</p></div></div>
             <div class="quote"><span class="price" id="indexPrice">24,876.35</span><span class="move positive" id="indexMove">+112.60 &nbsp; +0.45%</span></div>
@@ -49,7 +54,7 @@
 
           <section class="trading-grid">
             <div class="chain-panel">
-              <div class="chain-toolbar"><div class="tabs"><button class="selected">Option chain</button><button>OI analytics</button></div><div class="chain-controls"><button class="filter">⌘ Filters <b>2</b></button><button>⚙</button></div></div>
+              <div class="chain-toolbar"><div class="tabs"><button class="selected">Raw option chain</button><button>OI analytics</button></div><div class="chain-controls"><button class="filter">⌘ Filters <b>2</b></button><button>⚙</button></div></div>
               <div class="chain-meta"><span>CALLS</span><span class="strike-title">STRIKE</span><span>PUTS</span></div>
               <div class="chain-head"><span>OI <i>ⓘ</i></span><span>LTP</span><span>CHG</span><span>IV</span><span>OI <i>ⓘ</i></span><span>LTP</span><span>CHG</span><span>IV</span></div>
               <div id="optionRows" class="option-rows"></div>
@@ -72,7 +77,7 @@
       </main>
     </div>
     <div id="toast" class="toast" role="status"></div>
-    <dialog id="signalDialog" class="signal-dialog"><div><button id="closeDialog" class="dialog-close">×</button><p class="eyebrow">SIGNAL METHODOLOGY</p><h2>Reading the dashboard</h2><p><b>PCR</b> is put open interest divided by call open interest. A rising PCR can show stronger put-side participation; a falling PCR can show stronger call-side participation.</p><p><b>OI build-up</b> compares open-interest changes on calls and puts. The dashboard combines PCR direction, net OI build-up, and the selected 3 or 5 minute price trend to label the current bias.</p><p class="dialog-note">Signals are informational and can change quickly. Confirm with price action, risk limits, and your own strategy before placing any order.</p></div></dialog>
+    <dialog id="signalDialog" class="signal-dialog"><div><button id="closeDialog" class="dialog-close">×</button><p class="eyebrow">SIGNAL METHODOLOGY</p><h2>Reading the dashboard</h2><p><b>PCR</b> is total put OI divided by total call OI. <b>Change-OI PCR</b> uses put change in OI divided by call change in OI, which surfaces fresh positioning.</p><p>The engine scores PCR, call/put OI addition or unwinding, change in OI, price versus VWAP, volume, 3-minute momentum, 5-minute trend, and sector sentiment. No individual factor can create a trade signal.</p><div class="score-scale"><span>+10 to +15<br><b>STRONG BUY</b></span><span>+5 to +9<br><b>BUY</b></span><span>−4 to +4<br><b>WAIT</b></span><span>−5 to −9<br><b>SELL</b></span><span>−10 to −15<br><b>STRONG SELL</b></span></div><p class="dialog-note">Signals are decision support only and can change quickly. Confirm price action, liquidity, risk limits, and your own strategy before placing any order.</p></div></dialog>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

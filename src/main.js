@@ -1,9 +1,9 @@
 import './style.css'
 
 const markets = {
-  nifty: { name: 'NIFTY 50', short: 'N', description: "India's benchmark index", price: '24,876.35', move: '+112.60  +0.45%', pcr: '1.18', pcrChange: '+0.06', callOi: '8.96L', putOi: '10.57L', signal: 'BUY BIAS', signalClass: 'buy', detail: 'Put writing strengthens above 24,850', trend3: '↑ 0.42%', trend5: '↑ 0.56%' },
-  banknifty: { name: 'BANKNIFTY', short: 'B', description: 'Banking sector index', price: '53,184.70', move: '+286.85  +0.54%', pcr: '0.86', pcrChange: '-0.04', callOi: '6.42L', putOi: '5.52L', signal: 'SELL BIAS', signalClass: 'sell', detail: 'Call writing visible near 53,300', trend3: '↓ 0.18%', trend5: '↓ 0.31%' },
-  sensex: { name: 'SENSEX', short: 'S', description: 'BSE 30 index', price: '81,642.64', move: '+329.15  +0.40%', pcr: '1.03', pcrChange: '+0.01', callOi: '3.15L', putOi: '3.24L', signal: 'NEUTRAL', signalClass: 'neutral', detail: 'Balanced OI; wait for a breakout', trend3: '→ 0.05%', trend5: '↑ 0.09%' },
+  nifty: { name: 'NIFTY 50', short: 'N', description: "India's benchmark index", price: '24,876.35', move: '+112.60  +0.45%', pcr: '1.18', pcrChange: '+0.06', callOi: '8.96L', putOi: '10.57L', signal: 'STRONG BUY', signalClass: 'buy', detail: 'Put writing strengthens above 24,850', trend3: 'BUY', trend5: 'BUY', score: '12/15', strength: 'Strong' },
+  banknifty: { name: 'BANKNIFTY', short: 'B', description: 'Banking sector index', price: '53,184.70', move: '+286.85  +0.54%', pcr: '0.86', pcrChange: '-0.04', callOi: '6.42L', putOi: '5.52L', signal: 'WAIT', signalClass: 'neutral', detail: '3M/5M signals conflict; wait for alignment', trend3: 'SELL', trend5: 'BUY', score: '2/15', strength: 'Moderate' },
+  sensex: { name: 'SENSEX', short: 'S', description: 'BSE 30 index', price: '81,642.64', move: '+329.15  +0.40%', pcr: '1.03', pcrChange: '+0.01', callOi: '3.15L', putOi: '3.24L', signal: 'STRONG BUY', signalClass: 'buy', detail: 'Price and put support confirm the trend', trend3: 'BUY', trend5: 'BUY', score: '11/15', strength: 'Strong' },
 }
 
 let selectedMarket = 'nifty'
@@ -16,7 +16,7 @@ function renderMarkets() {
       <div class="card-top"><span class="index-dot ${id}">${market.short}</span><span class="market-name">${market.name}</span><span class="signal ${market.signalClass}">${market.signal}</span></div>
       <div class="market-price">${market.price}<small class="positive">${market.move}</small></div>
       <div class="metrics"><div><small>PCR</small><b>${market.pcr}</b><em class="${market.pcrChange.startsWith('-') ? 'negative' : 'positive'}">${market.pcrChange}</em></div><div><small>CALL OI</small><b>${market.callOi}</b></div><div><small>PUT OI</small><b>${market.putOi}</b></div></div>
-      <div class="signal-detail"><span>3m ${market.trend3} · 5m ${market.trend5}</span><b>${market.detail}</b></div>
+      <div class="signal-detail"><span>3M: ${market.trend3} · 5M: ${market.trend5} · ${market.score}</span><b>${market.detail} · ${market.strength}</b></div>
     </button>`).join('')
   document.querySelectorAll('.market-card').forEach((card) => card.addEventListener('click', () => selectMarket(card.dataset.market)))
 }
@@ -34,6 +34,22 @@ function selectMarket(id) {
 }
 
 renderMarkets()
+
+const scanners = {
+  bullish: [['1', 'ICICI BANK', 'Long build-up', 'BUY / BUY', '13/15', 'STRONG BUY'], ['2', 'RELIANCE', 'Call unwinding', 'BUY / BUY', '11/15', 'BUY'], ['3', 'TATA MOTORS', 'Put support', 'BUY / WAIT', '8/15', 'BUY']],
+  bearish: [['1', 'HINDALCO', 'Short build-up', 'SELL / SELL', '−12/15', 'STRONG SELL'], ['2', 'DLF', 'Put unwinding', 'SELL / SELL', '−9/15', 'SELL'], ['3', 'INFY', 'Call addition', 'SELL / WAIT', '−6/15', 'SELL']],
+}
+const sectors = [['NIFTY BANK', 'STRONG BULLISH', '8', 'bullish'], ['NIFTY AUTO', 'BULLISH', '6', 'bullish'], ['NIFTY IT', 'BULLISH', '5', 'bullish'], ['NIFTY PHARMA', 'NEUTRAL', '0', 'neutral'], ['NIFTY METAL', 'BEARISH', '−5', 'bearish'], ['NIFTY REALTY', 'STRONG BEARISH', '−8', 'bearish']]
+let scannerMode = 'bullish'
+function renderScanner() {
+  document.querySelector('#stockScanner').innerHTML = scanners[scannerMode].map((row) => `<button class="scanner-row stock-row"><span><b>${row[0]}</b> ${row[1]}</span><span>${row[2]}</span><span>${row[3]}</span><b>${row[4]}</b><em class="${row[5].includes('SELL') ? 'negative' : 'positive'}">${row[5]}</em></button>`).join('')
+}
+function renderSectors() {
+  document.querySelector('#sectorScanner').innerHTML = sectors.map((sector) => `<div class="sector-row"><span class="sector-mark ${sector[3]}"></span><b>${sector[0]}</b><span>${sector[1]}</span><strong class="${sector[3]}">${sector[2]}</strong></div>`).join('')
+}
+renderScanner(); renderSectors()
+document.querySelectorAll('.scanner-tabs button').forEach((button) => button.addEventListener('click', () => { scannerMode = button.dataset.scanner; document.querySelectorAll('.scanner-tabs button').forEach((item) => item.classList.toggle('active', item === button)); renderScanner() }))
+document.querySelector('#sectorInfo').addEventListener('click', () => dialog.showModal())
 
 const rows = [
   ['2.84L', '154.20', '+18.65%', '12.4%', '24,700', '1.96L', '6.15', '-28.91%', '14.8%'],
