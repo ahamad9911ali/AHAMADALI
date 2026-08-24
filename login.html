@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090e19" />
+    <title>Sign in — Dhan Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="login-page">
+    <main class="login-layout">
+      <section class="login-intro">
+        <a class="login-brand" href="/login.html" aria-label="Dhan Terminal home"><span class="brand-mark">d</span><span>dhan</span><small>TERMINAL</small></a>
+        <div class="intro-copy"><p class="eyebrow">OPTIONS INTELLIGENCE DESK</p><h1>Trade with the<br /><span>whole market</span> in view.</h1><p>Option chain, OI signals, sector strength and F&O scanners — one focused workspace for your trading decisions.</p></div>
+        <div class="intro-features"><span><i>✓</i> Multi-timeframe signal confirmation</span><span><i>✓</i> Live DhanHQ connectivity</span><span><i>✓</i> Built-in risk reminders</span></div>
+        <p class="intro-footer">© 2025 Dhan Terminal · For informed decision support</p>
+      </section>
+      <section class="login-area">
+        <div class="login-card">
+          <div class="login-card-head"><p class="eyebrow">WELCOME BACK</p><h2>Sign in to your desk</h2><p>Use your Dhan client credentials to continue.</p></div>
+          <form id="loginForm">
+            <label for="clientId">Dhan client ID</label>
+            <input id="clientId" name="clientId" autocomplete="username" placeholder="Enter your client ID" required />
+            <label for="accessToken">Access token</label>
+            <div class="password-wrap"><input id="accessToken" name="accessToken" type="password" autocomplete="current-password" placeholder="Enter your access token" required /><button type="button" id="showToken" aria-label="Show access token">◉</button></div>
+            <div class="login-options"><label class="check-label"><input type="checkbox" checked /> <span>Remember this device</span></label><a href="https://dhan.co" target="_blank" rel="noreferrer">Need help?</a></div>
+            <button class="login-submit" type="submit">Connect to DhanHQ <span>→</span></button>
+          </form>
+          <div class="login-divider"><span>OR</span></div>
+          <a class="demo-link" href="/index.html">Explore the demo terminal <span>→</span></a>
+          <p class="login-disclaimer">Your credentials are never stored in this browser by the demo interface. Connect a secure server-side DhanHQ integration before using live trading data.</p>
+        </div>
+      </section>
+    </main>
+    <div id="loginToast" class="toast" role="status"></div>
+    <script type="module" src="/src/login.js"></script>
+  </body>
+</html>
